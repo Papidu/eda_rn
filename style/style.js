@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet,StatusBar, Platform } from 'react-native';
 
 
 export const globalStyle = StyleSheet.create({
     main: {
         flex: 1,
-        margin: 0,
-        padding: 0,
+        // margin: 0,
+        // padding: 0,
 //   padding: 0;
 //   box-sizing: border-box;
 //   text-decoration: none;
@@ -18,6 +18,12 @@ export const globalStyle = StyleSheet.create({
         // width: 100 %,
         // height:100 %,
         // flex: 1 0 auto
+    },
+    AndroidSafeArea: {
+        flex: 1,
+        backgroundColor: "white",
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        
     }
 })
 
