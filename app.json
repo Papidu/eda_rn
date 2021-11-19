@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "eda_app",
-    "slug": "eda_app",
+    "name": "eda_app_v2",
+    "slug": "eda_app_v2",
     "version": "1.0.0",
     "orientation": "portrait",
-    "splash": {      
+    "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,13 +18,11 @@
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {        
+      "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
       }
     },
-    "web": {
-      
-    },
+    "web": {},
     "packagerOpts": {
       "config": "metro.config.js",
       "sourceExts": [
@@ -40,6 +38,7 @@
         "wasm",
         "svg"
       ]
-    }
+    },
+    "description": ""
   }
 }

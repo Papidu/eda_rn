@@ -20,7 +20,7 @@ export const globalStyle = StyleSheet.create({
         // flex: 1 0 auto
     },
     AndroidSafeArea: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: "white",
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
         

@@ -1,55 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
+
 import AppLoading from 'expo-app-loading';
 
 import React, {useState} from 'react';
+
+import { SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { SafeAreaView, StyleSheet, Text, View} from 'react-native';
-
-
-import Main  from './src/Page/Main';
-
 import * as Font from 'expo-font';
 import {globalStyle} from './style/style';
-
+import Main from './src/Page/Main';
+import Profile from './src/Page/Profile';
+import Basket from './src/Page/Basket';
+import { Mape } from './src/Page/Mape';
 const fonts = () => Font.loadAsync({
   'Roboto-bold': require('./style/fonts/Roboto-Bold.ttf')
 });
  
-// const AuthStack = createStackNavigator();
-// const Tabs = createBottomTabNavigator();
+// import TabNav from './navigation';
+// const TabArr = [
+//         {route: 'Main', label: 'Main', type: }
+// ]
+// const AuthStack = createStackNavigator(); Forkknife
+const Tabs = createBottomTabNavigator();
 export default function App() {
   const [font, setFont] = useState(false);
   
   if(font){
-
     return (
-      // <NavigationContainer>
-      //   <Tabs/>
-      // </NavigationContainer>
-      <SafeAreaView style={globalStyle.AndroidSafeArea}>
-        <Main/>
-      </SafeAreaView>
-      // <NavigationContainer>
-      //   <Tabs.Navigator>
-      //     <Tabs.Screen name="Main" component={Main} />
-      //     <Tabs.Screen name="Main2" component={Mape} />
-      //   </Tabs.Navigator>
-      // </NavigationContainer>
-
-      // <SafeAreaView>
-      //   <NavigationContainer>
-      //     <AuthStack.Navigator>
-      //       <AuthStack.Screen name="Main" component={Main} />
-      //       <AuthStack.Screen name="Mape" component={Mape} />
-      //       <AuthStack.Screen name="Profile" component={Profile} />
-      //       <AuthStack.Screen name="Basket" component={Basket} />
-      //     </AuthStack.Navigator>
-      //   </NavigationContainer>
-      // </SafeAreaView>
+      <NavigationContainer>
+        <Tabs.Navigator
+          screenOptions={{
+            headerShown:false,
+          }}
+        >
+          <Tabs.Screen name="Main" component={Main}/>
+          <Tabs.Screen name="Mape" component={Mape}/>
+          <Tabs.Screen name="Profile" component={Profile}/>
+          <Tabs.Screen name="Basket" component={Basket}/>
+        </Tabs.Navigator >
+      </NavigationContainer>
     );
   } else {
     return (
@@ -63,7 +55,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',

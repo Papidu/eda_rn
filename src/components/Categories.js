@@ -1,48 +1,40 @@
-import React from 'react'
-import { Image, Text, TouchableHighlight, View, ScrollView } from 'react-native'
+import React from 'react';
+import { StyleSheet, Image, Text, TouchableHighlight, View, ScrollView } from 'react-native';
 
-import { COLORS, SIZES } from '../../constants';
-import { categories } from './categor';
+import { COLORS, HEIGHT, SIZES,WIDTH } from '../../constants';
+// import { categories } from './categor';
 
-const Categories = () => {
+const Categories = ({ data }) => {
+    const {group,name} = data;
 	return (
-        <View
-            style={{
-                marginTop: 30,
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                justifyContent: 'space-between',
-            }}
-        >
-        {categories.map((cat, idx) => (
-            <View
-                key={`categories ${idx}`}
-                style={{
-                    width: '30%',
-                    marginBottom: 20,
-                }}
-            >
-            <ScrollView horizontal ={true}>
-                    <TouchableHighlight
-                        underlayColor={COLORS.secondary}                        
-                    >
-                        <View style={{ alignItems: 'center' }}>
-                            <Text
-                                style={{
-                                    fontSize: SIZES.h4,
-                                    marginTop: 10,
-                                    textAlign: 'center',
-                                }}
-                            >
-                                {cat.name_cat}
-                            </Text>
-                        </View>
-                    </TouchableHighlight>
-            </ScrollView>
-            </View>
-        ))}
-    </View>
+        <View style={styles.container}>        
+            <TouchableHighlight underlayColor={COLORS.secondary} onPress={() => alert('Pressed!')}>
+                <View> 
+                    <Text style={styles.textT}>{ group } </Text>
+                </View>
+            </TouchableHighlight>      
+        </View>
 	)
 }
+
+const styles = StyleSheet.create({
+    container: {
+        marginRight: 15,
+        flexDirection: 'row',
+        // backgroundColor: 'gold'
+        // flexWrap: 'wrap',
+        // justifyContent: 'center',
+    },
+    cover: {
+        width: WIDTH /3.4,
+        height: HEIGHT * 0.2
+    },
+    textT: {
+        fontSize: SIZES.h3,
+        marginTop: 10,
+        // backgroundColor: 'gold',
+        textAlign: 'center',
+    }
+})
 
 export { Categories }

@@ -1,8 +1,7 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import Logo from '../../assets/images/logo.svg';
-import { COLORS, SIZES } from '../../constants';
-
+import { Image, Text, View, StyleSheet } from 'react-native'
+import { COLORS, SIZES, HEIGHT,WIDTHS } from '../../constants';
+import LogoSvg from '../../assets/img_to_rn/logo'
 const Header = () => {
 	return (
 		<View
@@ -12,8 +11,8 @@ const Header = () => {
 				justifyContent: 'space-between',
 			}}
 		>
-			<View>
-            <Logo width={120} height={100} />				
+			<View>				
+				<LogoSvg/>				
 			</View>
 			<View style={{paddingRight: 10}}>
                 <Text style={{textAlign: 'right', fontSize: SIZES.h4}}>
@@ -24,5 +23,12 @@ const Header = () => {
 		</View>
 	)
 }
+const styles = StyleSheet.create({
+	img:{
 
+		width : 120,
+		height : 100		
+	}
+
+})
 export { Header }
