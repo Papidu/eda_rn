@@ -26,6 +26,7 @@ export default class Main extends Component {
         try {
           const response = await fetch(product_info_url,{ 
                         method: 'GET',
+                        // mode:'no-cors',
                         credentials: 'same-origin', // It can be include, same-origin, omit
                         headers: {
                             'Content-Type': 'application/json' // Your headers
@@ -43,6 +44,7 @@ export default class Main extends Component {
         try {
           const response = await fetch(catergor_url,{ 
                         method: 'GET',
+                        // mode:'no-cors',
                         credentials: 'same-origin', // It can be include, same-origin, omit
                         headers: {
                             'Content-Type': 'application/json' // Your headers

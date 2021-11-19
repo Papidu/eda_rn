@@ -5,6 +5,7 @@ import { COLORS, HEIGHT, SIZES,WIDTH } from '../../constants';
 // import { categories } from './categor';
 
 const Categories = ({ data }) => {
+    // console.log(data); 
     const {group,name} = data;
 	return (
         <View style={styles.container}>        
