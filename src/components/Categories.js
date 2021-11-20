@@ -21,7 +21,9 @@ const Categories = ({ data }) => {
 const styles = StyleSheet.create({
     container: {
         marginRight: 15,
+        marginLeft: 5,
         flexDirection: 'row',
+        // backgroundColor: '#FFFFFF',
         // backgroundColor: 'gold'
         // flexWrap: 'wrap',
         // justifyContent: 'center',

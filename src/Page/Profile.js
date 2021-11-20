@@ -1,17 +1,33 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View} from 'react-native';
-import {globalStyle} from '../../style/style';  //style/style';
-
+import { useNavigation } from '@react-navigation/core'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { Container } from '../components/Container';
 
 export default function Profile() {
+    const navigation = useNavigation()
+
+    const handleNavigateToProfile = () => {
+        navigation.navigate('OrderSpecificProduct');
+    }
     return (
-        <View style={globalStyle.main}>
-            <Text style={globalStyle.body}>Profile {'\n'}  word!</Text>    
-        </View>
-    );
-  
+        <Container showArrow={false}>
+            <View style={{marginTop:30}}>
+                <TouchableOpacity onPress= {() => handleNavigateToProfile() }>
+                    <Text>
+                        Перейти на страницу 
+                    </Text>                
+                </TouchableOpacity> 
+            </View>
+        </Container>
+    );  
 }
 
 const styles = StyleSheet.create({
 
 });
+
+
+   
+
+
+    

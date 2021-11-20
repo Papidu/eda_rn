@@ -73,8 +73,8 @@ export default class Main extends Component {
         return (
             <SafeAreaView>
                 <Header/>        
-                <View style={{alignItems: 'center'}}>
-                    <Banner/>
+                <View style={styles.contain_banner}>
+                    <Banner width={331} height={160}/>
                 </View>
                 <View> 
                     <ScrollView horizontal={true}
@@ -98,8 +98,14 @@ export default class Main extends Component {
 }
 
 const styles = StyleSheet.create({
+    contain:{
+      marginTop:10,
+    },
     contain_0:{
         height: HEIGHT/ 1.6
+    },
+    contain_banner:{
+      alignItems: 'center',
     },
     contain: {
         marginLeft: 5,

@@ -2,13 +2,17 @@ import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet, TouchableHighlight} from 'react-native'
 
 import AddDish from '../../assets/img_to_rn/add_dish';
+import BasketSVG from '../../assets/img_to_rn/basket';
 
 import { COLORS, SIZES, HEIGHT,WIDTHS} from '../../constants';
 
 const ProductCart = (product) => {
     console.log('product cart'); 
     let { name, description, price,image, ...rest} = product.product;
-    console.log(product);
+    // const {a} = count_in_basket ;
+
+    // console.log(count_in_basket);
+    // console.log(product);
 	return (
 		<View>
             <TouchableHighlight underlayColor={COLORS.green} onPress={() => alert('Pressed!')}>
@@ -19,11 +23,8 @@ const ProductCart = (product) => {
                     </View>
                     <View style={styles.menu_name_cost_quantity}>
                         <Text>
-                            {name} {' '} 
-                        </Text> 
-                        <Text>
-                           {price} ₽
-                        </Text>          
+                            {name} {' '} {price} ₽ <BasketSVG/> 
+                        </Text>       
                     </View>
                     <TouchableHighlight>
                         <AddDish/>
@@ -42,7 +43,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
         paddingLeft: 10,
-        borderBottomWidth:1
+        borderBottomWidth:1,
+        // backgroundColor: '#FFFFFF'
     },
     text:{},
     menu_name_cost_quantity: {
@@ -55,6 +57,10 @@ const styles = StyleSheet.create({
     img: {
         height: 83,
         width: 87,
+        marginBottom: 10,
+        marginRight: 10,
+        marginTop: 5,
+        borderRadius: 5
     }
 })
 

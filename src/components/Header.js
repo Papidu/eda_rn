@@ -9,9 +9,11 @@ const Header = () => {
 				flexDirection: 'row',
 				alignItems: 'center',
 				justifyContent: 'space-between',
+				marginTop: 25, 
+				// backgroundColor: '#faf9f9'//'#f7f5f2',
 			}}
 		>
-			<View>				
+			<View style={styles.container_logo}>				
 				<LogoSvg/>				
 			</View>
 			<View style={{paddingRight: 10}}>
@@ -24,10 +26,14 @@ const Header = () => {
 	)
 }
 const styles = StyleSheet.create({
+	container_logo:{
+		marginLeft: 10,
+		marginTop: 5,
+		marginBottom: 12
+	},
 	img:{
-
 		width : 120,
-		height : 100		
+		height : 100				
 	}
 
 })
