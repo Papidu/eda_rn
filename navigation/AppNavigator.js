@@ -3,15 +3,20 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Main  from '../src/Page/Main';
+// import Main  from '../src/Page/Main';
 import Mape  from '../src/Page/Mape';
 import Profile from '../src/Page/Profile';
 import Basket from '../src/Page/Basket';
 import OrderSpecificProduct from '../src/Page/OrderSpecificProduct';
 import { COLORS } from '../constants';
 
-import ForkknifeSVG from '../assets/img_to_rn/forkknife'
-import MappinSVG from '../assets/img_to_rn/mappin'
+import SVGForkknife from '../assets/img_to_rn/forkknife'
+import SVGMappin from '../assets/img_to_rn/mappin'
+import SVGUser from '../assets/img_to_rn/user'
+import SvgShopcart from '../assets/img_to_rn/shopcart'
+import ProductDetailsScreen from '../src/Page/ProductDetailsScreen';
+import Menu from '../src/Page/Menu';
+
 export const Navigator = () => {
     const Tabs = createBottomTabNavigator();
     const Stack = createStackNavigator();
@@ -32,11 +37,11 @@ export const Navigator = () => {
                 }}
             >
                 <Tabs.Screen
-                    name="Main" 
-                    component={Main}
+                    name="Menu" 
+                    component={Menu}
                     options={{
                         tabBarLabel: 'Меню',
-                        tabBarIcon: ({color,size, focused}) => (<ForkknifeSVG color={focused ? COLORS.green: COLORS.gray}/>),
+                        tabBarIcon: ({color,size, focused}) => (<SVGForkknife color={focused ? COLORS.green: COLORS.gray}/>),
                     }}    
                 />
                 <Tabs.Screen 
@@ -44,11 +49,25 @@ export const Navigator = () => {
                     component={Mape}
                     options={{
                         tabBarLabel: 'Mape',
-                        tabBarIcon: ({color,size, focused}) => (<MappinSVG color={focused ? 'gold': COLORS.gray}/>),
+                        tabBarIcon: ({color,size, focused}) => (<SVGMappin color={focused ? COLORS.green: COLORS.gray}/>),
                     }}
                 />
-                <Tabs.Screen name="Profile" component={Profile}/>
-                <Tabs.Screen name="Basket" component={Basket}/>
+                <Tabs.Screen 
+                    name="Profile"
+                    component={Profile}
+                    options={{
+                        tabBarLabel: 'Profile',
+                        tabBarIcon: ({color,size, focused}) => (<SVGUser color={focused ? COLORS.green: COLORS.gray}/>),
+                    }}
+                />
+                <Tabs.Screen 
+                    name="Basket"
+                    component={Basket}
+                    options={{
+                        tabBarLabel: 'Basket',
+                        tabBarIcon: ({color,size, focused}) => (<SvgShopcart color={focused ? COLORS.green: COLORS.gray}/>),
+                    }}
+                />
             </Tabs.Navigator >
         );
     };
@@ -61,7 +80,8 @@ export const Navigator = () => {
             }}
         >
             <Stack.Screen name= {'Tabs'} component={TabStack} />
-            <Stack.Screen name="Main" component={Main}/>
+            {/* <Stack.Screen name="Menu" component={Menu}/> */}
+            <Stack.Screen name="Details" component={ProductDetailsScreen} />
             <Stack.Screen name="Basket" component={Basket}/>
             <Stack.Screen name="Profile" component={Profile}/>
             <Stack.Screen name="OrderSpecificProduct" component={OrderSpecificProduct} />

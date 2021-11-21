@@ -3,9 +3,10 @@ import Svg, { Path } from "react-native-svg"
 
 function BasketSVG(props) {
   return (
-    <Svg
-      width={12}
-      height={12}
+    <Svg // 12 12
+      // width={props.width}
+      // height={props.height}
+      viewBox= "5 -7 12 12"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

@@ -1,38 +1,37 @@
-import React, { Component } from 'react'
-import { Text, View, Image, StyleSheet, TouchableHighlight} from 'react-native'
+import React, {Component} from 'react';
+import {Text, View, Image, StyleSheet, TouchableHighlight} from 'react-native';
+import { useNavigation } from '@react-navigation/native'
 
+import { COLORS } from '../../constants';
 import AddDish from '../../assets/img_to_rn/add_dish';
 import BasketSVG from '../../assets/img_to_rn/basket';
+const Card = ({product}) => {
+    const navigation = useNavigation()
 
-import { COLORS, SIZES, HEIGHT,WIDTHS} from '../../constants';
-
-const ProductCart = (product) => {
-    // console.log('product cart'); 
-    let { name, description, price,image, ...rest} = product.product;
-    // const {a} = count_in_basket ;
-
-    // console.log(count_in_basket);
-    // console.log(product);
-	return (
-		<View>
-            <TouchableHighlight underlayColor={COLORS.green} onPress={() => alert('Pressed!')}>
+    const handleNavigateToProfile = (product) => {
+        navigation.navigate('Details', product);
+    }
+    return (
+        <View>
+            <TouchableHighlight underlayColor={COLORS.green} onPress={() => handleNavigateToProfile(product)}>
                 <View style= {styles.container}>
                     <View style={styles.text} >
-                        <Image style={styles.img} source={{uri:image[0]}}/>                       
+                        <Image style={styles.img} source={{uri:product.image[0]}}/>                       
                     </View>
                     <View style={styles.menu_name_cost_quantity}>
                         <Text>
-                            {name} {' '} {price} ₽ <BasketSVG/> 
+                            {product.name} {' '} {product.price} ₽ <BasketSVG/> 
                         </Text>       
                     </View>
-                    <TouchableHighlight>
+                    <TouchableHighlight underlayColor={COLORS.green} onPress={() => alert('Aaaaaaa!')}>
                         <AddDish/>
                     </TouchableHighlight>
                 </View>
             </TouchableHighlight>
 		</View>
-	)
+    )
 }
+
 
 const styles = StyleSheet.create({
     container:{
@@ -63,4 +62,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export { ProductCart }
+export default Card

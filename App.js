@@ -3,7 +3,7 @@ import AppLoading from 'expo-app-loading';
 
 import React, {useState} from 'react';
 
-import { SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, StatusBar} from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -22,6 +22,7 @@ export default function App() {
     return (
       //<SafeAreaView>
         <NavigationContainer>
+          <StatusBar barStyle='light-content'  />
           <Navigator/>
         </NavigationContainer>
       //</SafeAreaView>
