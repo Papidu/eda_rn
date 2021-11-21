@@ -26,7 +26,7 @@ const CategoryList = (props) => {
                     )}
                 </View>
             </ScrollView>
-            <View>
+            <View style={styles.contain_0}> 
                 <FlatList data={props.product} 
                                 renderItem={({item}) =><Card product={item}/> }
                                 keyExtractor={(item) => item._id}                    
@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     
     ////
     contain_0:{
-        height: HEIGHT/ 1.6
+        height: HEIGHT/ 2.5,
+        marginBottom: 30,
     },
     contain_banner:{
       alignItems: 'center',
