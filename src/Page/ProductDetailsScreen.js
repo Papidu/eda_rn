@@ -10,7 +10,7 @@ import { COLORS, HEIGHT, WIDTH } from '../../constants';
 const ProductDetailsScreen = ({navigation, route}) => {
     const product = route.params;
     console.log(product);
-    console.log(product.image[0])
+    // console.log(product.img)
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -19,7 +19,7 @@ const ProductDetailsScreen = ({navigation, route}) => {
             </View>
             {/* <View style={styles.container}> */}
                 <View style={styles.imgContainer}>
-                    <Image source={{uri:product.image[0]}} style={styles.img} />
+                    <Image source={{uri:product.img}} style={styles.img} />
                 </View>
                 <View style={styles.detailsContainer}>
                     <Text style={{marginLeft: 10}}>{product.description}</Text>

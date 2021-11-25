@@ -6,6 +6,8 @@ import React, {useState} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, StatusBar} from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
+import { store } from './src/store'
+import { Provider } from 'react-redux'
 
 import * as Font from 'expo-font';
 import {globalStyle} from './style/style';
@@ -21,10 +23,12 @@ export default function App() {
   if(font){
     return (
       //<SafeAreaView>
+      <Provider store={store}>
         <NavigationContainer>
           <StatusBar barStyle='light-content'  />
           <Navigator/>
         </NavigationContainer>
+      </Provider>
       //</SafeAreaView>
     );
   } else {

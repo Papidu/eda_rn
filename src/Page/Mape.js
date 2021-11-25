@@ -1,23 +1,29 @@
-import React, { Component } from 'react'
-import { StyleSheet, Text,Image, View, SafeAreaView} from 'react-native';
-// import {globalStyle} from '../../style/style';
+import React, {Component} from 'react';
+import MapView from 'react-native-maps';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-export class Mape extends Component {
-    render() {
-        return (
-            <SafeAreaView>        
-                 <Text >Привет карта!</Text>
-            </SafeAreaView>
-        )
-    }
+export default function Mape()  {
+    return (
+        <View style={styles.container}>
+            <MapView style={styles.map}
+                    initialRegion={{
+                        latitude: 37.78825,
+                        longitude: -122.4324,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }} />
+        </View>
+    );
 }
-export default class Main extends Component {
-
-    render() {
-        return ( 
-            <View>
-                <Text>Profile {'\n'}  word!</Text>    
-            </View>
-        )
-    }
-}
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    map: {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
+    },
+  });

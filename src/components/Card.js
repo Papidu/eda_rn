@@ -16,7 +16,7 @@ const Card = ({product}) => {
             <TouchableHighlight underlayColor={COLORS.green} onPress={() => handleNavigateToProfile(product)}>
                 <View style= {styles.container}>
                     <View style={styles.text} >
-                        <Image style={styles.img} source={{uri:product.image[0]}}/>                       
+                        <Image style={styles.img} source={{uri:product.img}}/>                       
                     </View>
                     <View style={styles.menu_name_cost_quantity}>
                         <Text>
@@ -35,14 +35,17 @@ const Card = ({product}) => {
 
 const styles = StyleSheet.create({
     container:{
-        marginTop: 16,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         alignItems: 'center',
-        paddingLeft: 10,
-        borderBottomWidth:1,
-        // backgroundColor: '#FFFFFF'
+        marginTop: 16,
+        paddingLeft: 5,
+        paddingRight: 30,
+        borderWidth:1,
+        height: 120,
+        marginHorizontal: 2,
+        borderRadius: 10
     },
     text:{},
     menu_name_cost_quantity: {
