@@ -9,7 +9,7 @@ import { COLORS, HEIGHT, WIDTH } from '../../constants';
 
 const ProductDetailsScreen = ({navigation, route}) => {
     const product = route.params;
-    console.log(product);
+    // console.log(product);
     // console.log(product.img)
     return (
         <SafeAreaView style={styles.container}>

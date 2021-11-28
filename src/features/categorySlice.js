@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     selected_category: '0',
-    type_cat: 'Супы'
+    type_cat: '2',
 }
 
 export const categorySlice = createSlice({

@@ -16,11 +16,18 @@ import SVGUser from '../assets/img_to_rn/user'
 import SvgShopcart from '../assets/img_to_rn/shopcart'
 import ProductDetailsScreen from '../src/Page/ProductDetailsScreen';
 import Menu from '../src/Page/Menu';
+import { View,StyleSheet, Text } from 'react-native';
+import { addItemInCart } from '../src/features/counterInBascketSlice'; //'../features/counterInBascketSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { product } from '../src/components/categor';
+import getTotalPrice from '../src/utils';
+
 
 export const Navigator = () => {
     const Tabs = createBottomTabNavigator();
     const Stack = createStackNavigator();
-
+    const item = useSelector((state) => state.cart.itemsInCart);
+    const price = getTotalPrice(item);
     const TabStack = () => {
         return (
             <Tabs.Navigator
@@ -34,7 +41,7 @@ export const Navigator = () => {
                     right: 16,
                     borderRadius:20
                     }
-                }}
+                }}                
             >
                 <Tabs.Screen
                     name="Menu" 
@@ -66,9 +73,11 @@ export const Navigator = () => {
                     options={{
                         tabBarLabel: 'Basket',
                         tabBarIcon: ({color,size, focused}) => (<SvgShopcart color={focused ? COLORS.green: COLORS.gray}/>),
+                        tabBarBadge: price,
+                        tabBarBadgeStyle: { backgroundColor: 'green' }
                     }}
                 />
-            </Tabs.Navigator >
+            </Tabs.Navigator >                
         );
     };
 
@@ -82,7 +91,8 @@ export const Navigator = () => {
             <Stack.Screen name= {'Tabs'} component={TabStack} />
             {/* <Stack.Screen name="Menu" component={Menu}/> */}
             <Stack.Screen name="Details" component={ProductDetailsScreen} />
-            <Stack.Screen name="Basket" component={Basket}/>
+            <Stack.Screen name="Menu" component={Menu}/>
+            <Stack.Screen name="Basket" component={Basket} />
             <Stack.Screen name="Profile" component={Profile}/>
             <Stack.Screen name="OrderSpecificProduct" component={OrderSpecificProduct} />
         </Stack.Navigator>
@@ -90,4 +100,25 @@ export const Navigator = () => {
 
 };
 
-
+const styles = StyleSheet.create({
+    container: {
+      // flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    money: {
+      position: 'absolute', 
+      zIndex:1,
+      elevation:1, 
+      height:20,
+      width: 45,
+      marginTop: 637, 
+      marginLeft:299,
+      backgroundColor: '#069e0b', 
+      borderRadius: 3,
+      alignItems: 'center',
+      justifyContent: 'center',
+    }
+  });
+  

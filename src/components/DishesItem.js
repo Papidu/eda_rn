@@ -1,49 +1,57 @@
-import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import React, {useState, useEffect} from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { COLORS } from '../../constants';
 import AddDish from '../../assets/img_to_rn/add_dish';
 import BasketSVG from '../../assets/img_to_rn/basket';
 import { useSelector, useDispatch } from 'react-redux';
 import {changeCategory, changeCategoryID} from '../features/categorySlice'
+import { addItemInCart } from '../features/counterInBascketSlice';
 
 
-export default function DishesItem(props) {
-    const navigation = useNavigation()
-
-    const {type_cat, selected_category} = useSelector((state) => state.category);
-    // const dispatch = useDispatch()
-
-    const handleNavigateToProfile = (product) => {
-        navigation.navigate('Details', product);
-    }
-    // console.log(props.product.filter(x => x.category_type === parseInt(type_cat, 10)), type_cat)
+export default function DishesItem(props) {    
+    const {type_cat} = useSelector((state) => state.category);
+    
     return (
-        <TouchableOpacity style={{marginBottom:100}} activeOpacity={1} onPress={() => handleNavigateToProfile(props.product)}>
-            {props.product.filter(x => x.category_type === parseInt(type_cat, 10)).map((item, index) => (
-                <View key={index} style={{}}>
-                    <DishesCart product={item} />
-                </View>
-            ))}            
-        </TouchableOpacity>
+        <View style={{height: 280}}>
+        <FlatList 
+            data={props.product.filter(x => x.category_type === parseInt(type_cat, 10))}
+            renderItem={({item}) =><DishesCart product={item} />}
+            keyExtractor={(item) => item.id.toString()}/>
+         </View>       
     );
 }
 
-const DishesCart = (props) =>{
+const DishesCart = React.memo(({product}) =>{
+    const {itemsInCart} = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+    const navigation = useNavigation()
+    
+    const handleClickInCart = (e) => {
+        console.log('handleClickInCart ', e.name)
+        dispatch((addItemInCart(e)))
+    }
+    const handleNavigateToProfile = (product) => {
+        navigation.navigate('Details', product);
+    }
+
     return (
-        <View style= {styles.container}>        
-            <Image style={styles.img} source={{uri:props.product.img}}/>
-            <View style={{marginLeft:15, width:200}}>
-                <Text>{props.product.name}</Text>  
-                <Text style={{fontWeight:'bold'}}>{props.product.price} ₽ {' '}   
-                    <BasketSVG/>
-                </Text>
+        <TouchableOpacity activeOpacity={1} onPress={() => handleNavigateToProfile(product)}>
+            <View style= {styles.container}>    
+                <Image style={styles.img} source={{uri:product.img}}/>
+                <View style={{marginLeft:15, width:200}}>
+                    <Text>{product.name}</Text>
+                    <View style={{flexDirection: 'row'}}>  
+                        <Text style={{fontWeight:'bold'}}>{product.price} ₽ {' '}</Text>                    
+                        <Text style={{color: COLORS.green}}><BasketSVG/>  </Text>
+                    </View>
+                </View>
+                <TouchableOpacity style={{flexGrow: 5, marginRight:20}} underlayColor={COLORS.green} onPress={()=> handleClickInCart(product)}>
+                        <AddDish/>
+                </TouchableOpacity>         
             </View>
-            <TouchableOpacity style={{flexGrow: 5, marginRight:20}} underlayColor={COLORS.green} onPress={() => alert('Aaaaaaa!')}>
-                    <AddDish/>
-            </TouchableOpacity>         
-        </View>
-    )}
+        </TouchableOpacity>   
+    )});
 
 
 const styles = StyleSheet.create({
@@ -72,6 +80,16 @@ const styles = StyleSheet.create({
         paddingRight:'10%'
     },
 
+
+
+
+    // props.product.filter(x => x.category_type === parseInt(type_cat, 10)).map((item, index) => (
+    //     <View key={index} style={{}}>
+    //         <TouchableOpacity style={{}} activeOpacity={1} onPress={() => handleNavigateToProfile(props.product)}>
+    //             <DishesCart product={item} />            
+    //         </TouchableOpacity>
+    //     </View> 
+    // ))
 // img: {
 //     height: 83,
 //     width: 87,
@@ -81,20 +99,3 @@ const styles = StyleSheet.create({
 //     borderRadius: 5
 // }
 })
-{/* <View>
-            <TouchableHighlight underlayColor={COLORS.green} onPress={() => handleNavigateToProfile(product)}>
-                <View style= {styles.container}>
-                    <View style={styles.text} >
-                        <Image style={styles.img} source={{uri:product.img}}/>                       
-                    </View>
-                    <View style={styles.menu_name_cost_quantity}>
-                        <Text>
-                            {product.name} {' '} {product.price} ₽ <BasketSVG/> 
-                        </Text>       
-                    </View>
-                    <TouchableHighlight underlayColor={COLORS.green} onPress={() => alert('Aaaaaaa!')}>
-                        <AddDish/>
-                    </TouchableHighlight>
-                </View>
-            </TouchableHighlight>
-		</View> */}

@@ -1,7 +1,7 @@
 
 import AppLoading from 'expo-app-loading';
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { SafeAreaView, StyleSheet, Text, View, StatusBar} from 'react-native';
 
@@ -16,6 +16,7 @@ const fonts = () => Font.loadAsync({
 });
 
 import { Navigator } from './navigation/AppNavigator';
+import { COLORS } from './constants';
 
 export default function App() {
   const [font, setFont] = useState(false);
@@ -24,9 +25,9 @@ export default function App() {
     return (
       //<SafeAreaView>
       <Provider store={store}>
-        <NavigationContainer>
+        <NavigationContainer style={{backgroundColor:'#E4E4E4'}}>
           <StatusBar barStyle='light-content'  />
-          <Navigator/>
+          <Navigator/>                  
         </NavigationContainer>
       </Provider>
       //</SafeAreaView>
@@ -48,4 +49,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  money: {
+    position: 'absolute', 
+    zIndex:1,
+    elevation:1, 
+    height:20,
+    width: 45,
+    marginTop: 637, 
+    marginLeft:299,
+    backgroundColor: '#069e0b', 
+    borderRadius: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });
