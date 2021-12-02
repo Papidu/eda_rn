@@ -91,7 +91,7 @@ export const Navigator = () => {
             <Stack.Screen name= {'Tabs'} component={TabStack} />
             {/* <Stack.Screen name="Menu" component={Menu}/> */}
             <Stack.Screen name="Details" component={ProductDetailsScreen} />
-            <Stack.Screen name="Menu" component={Menu}/>
+            {/* <Stack.Screen name="Menu" component={Menu}/> */}
             <Stack.Screen name="Basket" component={Basket} />
             <Stack.Screen name="Profile" component={Profile}/>
             <Stack.Screen name="OrderSpecificProduct" component={OrderSpecificProduct} />

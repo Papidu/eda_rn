@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, FlatList, RefreshControl } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { COLORS } from '../../constants';
 import AddDish from '../../assets/img_to_rn/add_dish';
@@ -8,21 +8,64 @@ import { useSelector, useDispatch } from 'react-redux';
 import {changeCategory, changeCategoryID} from '../features/categorySlice'
 import { addItemInCart } from '../features/counterInBascketSlice';
 
+const all_url = 'http://10.241.13.136:8000/api/dishes';
+const headrGet = { 
+  method: 'GET',
+  mode:'no-cors',
+  credentials: 'same-origin', // It can be include, same-origin, omit
+  headers: {
+      'Content-Type': 'application/json' // Your headers
+}}
+
 
 export default function DishesItem(props) {    
     const {type_cat} = useSelector((state) => state.category);
-    
+    const [refreshing, setrefReshing] = useState(false)
+    const [productItem, setproductItem] = useState(props.product)
+    const onRefreshItem =async () =>{
+        setrefReshing(true);
+        try {
+            const response = await fetch(all_url,headrGet);
+            const json = await response.json();
+            setproductItem(json);
+            setrefReshing(false);   
+          } catch (error) {
+            console.log('error',error);
+          } finally {
+            setrefReshing(false);
+          }
+    }
+
+    console.log(props.product.length,productItem.length)
+
     return (
-        <View style={{height: 280}}>
-        <FlatList 
-            data={props.product.filter(x => x.category_type === parseInt(type_cat, 10))}
+        <View style={{height: 280}}>            
+        {
+            productItem.length === 0? 
+                <FlatList 
+                data={props.product.filter(x => x.category_type === parseInt(type_cat, 10))}
+                renderItem={({item}) =><DishesCart product={item} />}
+                keyExtractor={(item) => item.id.toString()}
+                refreshControl={<RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefreshItem}
+                    />}
+                />
+            : <FlatList 
+            data={productItem.filter(x => x.category_type === parseInt(type_cat, 10))}
             renderItem={({item}) =><DishesCart product={item} />}
-            keyExtractor={(item) => item.id.toString()}/>
+            keyExtractor={(item) => item.id.toString()}
+            refreshControl={<RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={onRefreshItem}
+                            />}
+            />
+        }
          </View>       
     );
 }
 
-const DishesCart = React.memo(({product}) =>{
+const DishesCart = ({product}) =>{
     const {itemsInCart} = useSelector((state) => state.cart);
     const dispatch = useDispatch();
     const navigation = useNavigation()
@@ -36,22 +79,20 @@ const DishesCart = React.memo(({product}) =>{
     }
 
     return (
-        <TouchableOpacity activeOpacity={1} onPress={() => handleNavigateToProfile(product)}>
-            <View style= {styles.container}>    
+        <TouchableOpacity style= {styles.container} activeOpacity={1} onPress={() => handleNavigateToProfile(product)}>
                 <Image style={styles.img} source={{uri:product.img}}/>
-                <View style={{marginLeft:15, width:200}}>
+                <View style={{marginLeft:15, width:170, marginRight:5}}>
                     <Text>{product.name}</Text>
                     <View style={{flexDirection: 'row'}}>  
                         <Text style={{fontWeight:'bold'}}>{product.price} ₽ {' '}</Text>                    
                         <Text style={{color: COLORS.green}}><BasketSVG/>  </Text>
                     </View>
                 </View>
-                <TouchableOpacity style={{flexGrow: 5, marginRight:20}} underlayColor={COLORS.green} onPress={()=> handleClickInCart(product)}>
+                <TouchableOpacity style={{flexGrow: 5, marginRight:25, marginBottom:7, width:35,height:35}} underlayColor={COLORS.green} onPress={()=> handleClickInCart(product)}>
                         <AddDish/>
-                </TouchableOpacity>         
-            </View>
+                </TouchableOpacity> 
         </TouchableOpacity>   
-    )});
+    )};
 
 
 const styles = StyleSheet.create({
@@ -69,7 +110,7 @@ const styles = StyleSheet.create({
     img: {
         width: 87,
         height: 83,
-        margin: 10
+        margin: 10,
     },
     text:{},
     menu_name_cost_quantity: {
@@ -79,23 +120,4 @@ const styles = StyleSheet.create({
         paddingBottom: 0,
         paddingRight:'10%'
     },
-
-
-
-
-    // props.product.filter(x => x.category_type === parseInt(type_cat, 10)).map((item, index) => (
-    //     <View key={index} style={{}}>
-    //         <TouchableOpacity style={{}} activeOpacity={1} onPress={() => handleNavigateToProfile(props.product)}>
-    //             <DishesCart product={item} />            
-    //         </TouchableOpacity>
-    //     </View> 
-    // ))
-// img: {
-//     height: 83,
-//     width: 87,
-//     marginBottom: 10,
-//     marginRight: 10,
-//     marginTop: 5,
-//     borderRadius: 5
-// }
 })

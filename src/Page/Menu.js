@@ -27,13 +27,10 @@ export default function Menu()  {
         try {
           const response = await fetch(catergor_url,headrGet);
           const json = await response.json();
-          // if(!isIgnoreResponse){
             setCatergor_data(json);
-          // }
         } catch (error) {
           console.log(error);
         } finally {
-          // state.isLoading =false;
         }
       }
       const getAll = async () => {

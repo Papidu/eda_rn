@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "eda_app_v2",
-    "slug": "eda_app_v2",
+    "name": "eda_app",
+    "slug": "eda_app",
     "version": "1.0.0",
     "orientation": "portrait",
     "splash": {
@@ -20,7 +20,8 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.mrcentaur.eda_app"
     },
     "web": {},
     "packagerOpts": {
