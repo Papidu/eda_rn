@@ -20,14 +20,14 @@ import { View,StyleSheet, Text } from 'react-native';
 import { addItemInCart } from '../src/features/counterInBascketSlice'; //'../features/counterInBascketSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { product } from '../src/components/categor';
-import getTotalPrice from '../src/utils';
+// import getTotalPrice from '../src/utils';
 
 
 export const Navigator = () => {
     const Tabs = createBottomTabNavigator();
     const Stack = createStackNavigator();
     const item = useSelector((state) => state.cart.itemsInCart);
-    const price = getTotalPrice(item);
+    const get_price = useSelector((state) => state.cart.price);
     const TabStack = () => {
         return (
             <Tabs.Navigator
@@ -73,7 +73,7 @@ export const Navigator = () => {
                     options={{
                         tabBarLabel: 'Basket',
                         tabBarIcon: ({color,size, focused}) => (<SvgShopcart color={focused ? COLORS.green: COLORS.gray}/>),
-                        tabBarBadge: price,
+                        tabBarBadge: get_price,
                         tabBarBadgeStyle: { backgroundColor: 'green' }
                     }}
                 />

@@ -6,7 +6,7 @@ import AddDish from '../../assets/img_to_rn/add_dish';
 import BasketSVG from '../../assets/img_to_rn/basket';
 import { useSelector, useDispatch } from 'react-redux';
 import {changeCategory, changeCategoryID} from '../features/categorySlice'
-import { addItemInCart } from '../features/counterInBascketSlice';
+import { addItemInCart, getTotalPrice } from '../features/counterInBascketSlice';
 
 const all_url = 'http://10.241.13.136:8000/api/dishes';
 const headrGet = { 
@@ -72,7 +72,8 @@ const DishesCart = ({product}) =>{
     
     const handleClickInCart = (e) => {
         console.log('handleClickInCart ', e.name)
-        dispatch((addItemInCart(e)))
+        dispatch(addItemInCart(e));
+        dispatch(getTotalPrice());
     }
     const handleNavigateToProfile = (product) => {
         navigation.navigate('Details', product);

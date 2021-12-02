@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import getAllPrice from '../utils';
 const initialState = {
   itemsInCart: [],
   itemsUniqInCard: [],
   itemsUniqCountInCard: [],
+  price: 0,
 }
 
 export const cartSlice = createSlice({
@@ -12,7 +13,7 @@ export const cartSlice = createSlice({
   reducers: {
     addItemInCart: (state, action) => {
       let array = {}
-      action.payload.count = 0
+      action.payload.count = 1
       console.log('-> ',action.payload)
       state.itemsInCart.push(action.payload)
       
@@ -23,8 +24,28 @@ export const cartSlice = createSlice({
     deleteItemInCart: (state, action) => {
       state.itemsInCart = state.itemsInCart.filter(product => product.id !== action.payload)
     },
-    getItemCountCard:() =>{
-      
+    incrementItemCard: (state, action) => {
+      let idx =  findCountInCard(state.itemsUniqCountInCard,action.payload)
+      state.itemsUniqCountInCard[idx].count++;
+    },
+    decrementItemCard: (state, action) =>  {
+      let idx =  findCountInCard(state.itemsUniqCountInCard,action.payload)
+      let cnt = state.itemsUniqCountInCard[idx].count
+      // console.log('+++++++\n',idx,cnt-- < 1 & idx > -1, cnt-- < 1,idx > -1)
+      if(cnt-- < 1 & idx > -1){
+          state.itemsUniqCountInCard.splice(idx, 1);
+      }else{
+        state.itemsUniqCountInCard[idx].count--;
+      }
+    },
+    getTotalPrice(state){
+      state.price = getAllPrice(state.itemsUniqCountInCard)
+    },
+    deleteAllItemInCart(state){
+      state.itemsInCart.length = 0;
+      state.itemsUniqCountInCard.length = 0;
+      state.itemsUniqInCard.length = 0;
+      // console.log('deleteAllItemInCart -> ',state.itemsInCart.length )
     }
   },
 })
@@ -59,6 +80,7 @@ function getUniqArr(oldArr){
   });
   return array 
 }
+
 function getUniqCount(oldArr){
   var res = [];
       var obj = {};
@@ -79,8 +101,21 @@ function getUniqCount(oldArr){
       return res;
 }
 
+function findCountInCard(arrCard, newCount){
+  var cityId = -1;
+  for(var i = 0; i < arrCard.length; i++) {
+    if(arrCard[i].name == newCount.name) {
+      cityId = i;
+      console.log('--------------------\n', arrCard[i].name,cityId )
+      break;
+    }
+  }
+  return cityId
+}
+
+
 // Action creators are generated for each case reducer function
-export const { addItemInCart, deleteItemInCart,getItemCountCard } = cartSlice.actions
+export const { addItemInCart, deleteItemInCart,incrementItemCard, decrementItemCard, getTotalPrice, deleteAllItemInCart} = cartSlice.actions
 
 export default cartSlice.reducer
 // array.forEach(function(obj) {  
