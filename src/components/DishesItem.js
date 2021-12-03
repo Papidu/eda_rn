@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {changeCategory, changeCategoryID} from '../features/categorySlice'
 import { addItemInCart, getTotalPrice } from '../features/counterInBascketSlice';
 
-const all_url = 'http://10.241.13.136:8000/api/dishes';
+const all_url = 'https://eda.na4u.ru/api/dishes';
 const headrGet = { 
   method: 'GET',
   mode:'no-cors',

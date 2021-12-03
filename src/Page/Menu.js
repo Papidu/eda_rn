@@ -7,9 +7,9 @@ import Categories from '../components/Categories';
 import Banner from '../../assets/img_to_rn/banner';
 import DishesItem from '../components/DishesItem';
 
-const catergor_url = 'http://10.241.13.136:8000/api/category/';
+const catergor_url = 'https://eda.na4u.ru/api/category/';//'http://10.241.13.136:8000/api/category/';
 // const product_info_url = 'http://91.226.83.26:3001/dish?token=8zCK8LQV7RXdjXa1';
-const all_url = 'http://10.241.13.136:8000/api/dishes';
+const all_url = 'https://eda.na4u.ru/api/dishes';
 const headrGet = { 
   method: 'GET',
   mode:'no-cors',
