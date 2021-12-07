@@ -67,6 +67,7 @@ export default function DishesItem(props) {
 
 const DishesCart = ({product}) =>{
     const {itemsInCart} = useSelector((state) => state.cart);
+    const {itemsUniqCountInCard} = useSelector((state) => state.cart);
     const dispatch = useDispatch();
     const navigation = useNavigation()
     
@@ -76,6 +77,9 @@ const DishesCart = ({product}) =>{
         dispatch(getTotalPrice());
     }
     const handleNavigateToProfile = (product) => {
+        // console.log(product.name, '---------------------\n\n')
+        // let a = itemsUniqCountInCard.filter(x => x.name === product.name);
+        // console.log(a.name, a.count);
         navigation.navigate('Details', product);
     }
 
