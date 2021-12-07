@@ -30,7 +30,7 @@ const HeaderMenu = () => {
                     Вы заберёте заказ из
                 </Text>
 				<TouchableOpacity activeOpacity={1} onPress= {() => handleNavigateMap() }>
-                	<Text style={{fontize: SIZES.h4, color: COLORS.green }}>Итерия Е-Да! {selected_marker.title}</Text>    
+                	<Text style={{fontSize: SIZES.h4, color: COLORS.green }}>Итерия Е-Да! {selected_marker.title}</Text>    
 				</TouchableOpacity>            
 			</View>
 		</View>

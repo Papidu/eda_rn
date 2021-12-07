@@ -109,12 +109,12 @@ const DishesCard = ({product}) =>{
                 </View>
             </TouchableOpacity>      
             <View style={styles.container_btn}>
-                <TouchableOpacity  onPress={()=> handleIncrementItemCard(product)}>
-                    <AntDesign name="plussquare" size={24} color="gray" />
+                <TouchableOpacity  onPress={()=> handleDecrementItemCard(product)}>
+                    <AntDesign name="minussquare" size={24} color="gray"/>
                 </TouchableOpacity>
                     <Text>{product.count}</Text>
-                <TouchableOpacity onPress={()=> handleDecrementItemCard(product)}>
-                    <AntDesign name="minussquare" size={24} color="gray" />
+                <TouchableOpacity onPress={()=> handleIncrementItemCard(product)}>
+                    <AntDesign name="plussquare" size={24} color="gray"  />
                 </TouchableOpacity>    
             </View>
         </View>   

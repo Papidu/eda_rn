@@ -36,7 +36,7 @@ export default function DishesItem(props) {
           }
     }
 
-    console.log(props.product.length,productItem.length)
+    // console.log(props.product.length,productItem.length)
 
     return (
         <View style={{height: 280}}>            
@@ -71,7 +71,7 @@ const DishesCart = ({product}) =>{
     const navigation = useNavigation()
     
     const handleClickInCart = (e) => {
-        console.log('handleClickInCart ', e.name)
+        // console.log('handleClickInCart ', e.name)
         dispatch(addItemInCart(e));
         dispatch(getTotalPrice());
     }
