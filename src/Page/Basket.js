@@ -9,18 +9,19 @@ import { addItemInCart,incrementItemCard,decrementItemCard,getTotalPrice,deleteA
 import AddDish from '../../assets/img_to_rn/add_dish';
 import BasketSVG from '../../assets/img_to_rn/basket';
 import { AntDesign } from '@expo/vector-icons'; 
+import { changeSelectedMarker } from '../features/dataMapSlice';
 export default function Basket() {
     const {itemsInCart} = useSelector((state) => state.cart);
     const {itemsUniqInCard} = useSelector((state) => state.cart);
     const {itemsUniqCountInCard} = useSelector((state) => state.cart);
     const {price} = useSelector((state) => state.cart);
     const dispatch = useDispatch();
-    // console.log(new Set(itemsInCart))
-    //Array.from(new Set(itemsInCart));
+    const {selected_marker} = useSelector((state) => state.dataMap)
+
     return (
     <SafeAreaView>
         <Header/>
-        <ChangeLocation/>
+        <ChangeLocation local = {selected_marker}/>
         <View style={styles.big_container}>
             {
                 itemsInCart.length > 0? (
@@ -52,13 +53,21 @@ export default function Basket() {
   
 }
 
-const ChangeLocation = (props) =>{
+const ChangeLocation = ({local}) =>{
+    const navigation = useNavigation()
+
+	const handleNavigateMap = () => {
+		navigation.navigate('Map');
+	}
     return (
         <View style={{marginBottom:10}}>
             <Text style={{marginLeft:18}}>Адрес выдачи заказа:</Text>
             <View style={{flexDirection:'row', justifyContent:'space-around'}}>
-               <Text>Екатиринбург, Мира,17</Text>
-               <TouchableOpacity>
+               <Text style={{
+                   marginLeft:10,
+                   width:200,
+                   fontWeight:'bold'}}>{local.title}</Text>
+               <TouchableOpacity activeOpacity={1} onPress= {() => handleNavigateMap() }>
                     <Text style={{color:'green', textDecorationLine: 'underline'}}>Изменить адрес</Text> 
                 </TouchableOpacity>
             </View>

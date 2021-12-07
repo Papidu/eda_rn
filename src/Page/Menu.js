@@ -1,6 +1,6 @@
 import React, {Component, useEffect, useState} from 'react'
 import { StyleSheet, Text, View, SafeAreaView,ScrollView, FlatList } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 import { COLORS, HEIGHT } from '../../constants'
 import { HeaderMenu} from '../components/';
 import Categories from '../components/Categories';

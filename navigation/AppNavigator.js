@@ -39,7 +39,8 @@ export const Navigator = () => {
                     bottom: 10,
                     left: 16,
                     right: 16,
-                    borderRadius:20
+                    borderRadius:20,
+                    zIndex:0
                     }
                 }}                
             >
@@ -52,9 +53,12 @@ export const Navigator = () => {
                     }}    
                 />
                 <Tabs.Screen 
-                    name="Mape"
+                    name="Map"
                     component={Mape}
+                    
                     options={{
+                        tabBarVisible: true,
+                        // tabBarVisible: false,
                         tabBarLabel: 'Mape',
                         tabBarIcon: ({color,size, focused}) => (<SVGMappin color={focused ? COLORS.green: COLORS.gray}/>),
                     }}
