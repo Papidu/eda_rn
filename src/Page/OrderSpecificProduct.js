@@ -13,7 +13,7 @@ const OrderSpecificProduct = () => {
     return (
         <Container>
             <Text>
-                afffqwfwefq
+                Шутка, пока всё в разработке
             </Text>
         </Container>
     )

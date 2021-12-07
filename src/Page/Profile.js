@@ -14,9 +14,12 @@ export default function Profile() {
             <View style={{marginTop:30}}>
                 <TouchableOpacity onPress= {() => handleNavigateToProfile() }>
                     <Text>
-                        Перейти на страницу 
+                        Посмотреть секретную страницу
                     </Text>                
                 </TouchableOpacity> 
+                <Text>
+                    Модуль находится в разработке 
+                </Text> 
             </View>
         </Container>
     );  
